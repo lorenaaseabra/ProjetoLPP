@@ -7,8 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Main {
-
-    public static void main(String[] args) {
+    public static List<Funcionario> criarFuncionarios() {
         List<Funcionario> funcionarios = new ArrayList<>();
 
         Gerente gerente1 = new Gerente("João", 35, 5000.0, "Vendas");
@@ -23,9 +22,16 @@ public class Main {
         funcionarios.add(estagiario1);
         funcionarios.add(estagiario2);
 
+        return funcionarios;
+    }
+
+    public static void main(String[] args) {
+        List<Funcionario> funcionarios = criarFuncionarios();
+
         for (Funcionario funcionario : funcionarios) {
             funcionario.imprimirDados();
         }
+
         // Abre o arquivo para escrita
 
         try (PrintWriter writer = new PrintWriter(new FileWriter("funcionarios.txt"))) {
@@ -37,24 +43,6 @@ public class Main {
             System.out.println("Erro ao escrever no arquivo: " + e.getMessage());
         }
 
-        // Tratamento de erros
-        try {
-            gerente1.aumentarSalario(-10); // Tentativa de aumento com valor negativo
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro ao aumentar o salário do gerente1: " + e.getMessage());
-        }
-
-        try {
-            dev1.atualizarLinguagem(null); // Tentativa de atualização de linguagem com valor nulo
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro ao atualizar a linguagem do dev1: " + e.getMessage());
-        }
-
-        try {
-            estagiario1.atualizarDuracaoEstagio(-3); // Tentativa de atualização de duração do estágio com valor negativo
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro ao atualizar a duração do estágio do estagiario1: " + e.getMessage());
-        }
     }
 }
 
