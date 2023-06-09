@@ -34,4 +34,31 @@ public class Desenvolvedor extends Funcionario {
         public void imprimirDados() {
             System.out.println("Desenvolvedor: " + nome + ", " + idade + " anos, salário: " + salario + ", linguagem: " + linguagem);
         }
-    }
+
+        // Método com tratamento de erro
+
+        public void aumentarSalario(double aumentoPercentual) {
+            try {
+                if (aumentoPercentual < 0) {
+                    throw new IllegalArgumentException("O aumento percentual deve ser um valor positivo.");
+                }
+    
+                double aumento = salario * aumentoPercentual / 100;
+                salario += aumento;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro ao aumentar o salário: " + e.getMessage());
+            }
+        }
+    
+        public void atualizarLinguagem(String novaLinguagem) {
+            try {
+                if (novaLinguagem == null || novaLinguagem.isEmpty()) {
+                    throw new IllegalArgumentException("A nova linguagem não pode ser nula ou vazia.");
+                }
+    
+                this.linguagem = novaLinguagem;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro ao atualizar a linguagem: " + e.getMessage());
+            }
+        }
+}

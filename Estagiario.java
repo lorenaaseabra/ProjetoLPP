@@ -34,5 +34,19 @@ public class Estagiario extends Desenvolvedor {
     public void imprimirDados() {
         System.out.println("Estagiário: " + nome + ", " + idade + " anos, salário: " + salario + ", linguagem: " + getLinguagem() + ", duração do estágio: " + duracaoEstagio + " meses");
     }
+
+    // Métodos com tratamento de erros
+
+    public void atualizarDuracaoEstagio(int novaDuracao) {
+        try {
+            if (novaDuracao < 0) {
+                throw new IllegalArgumentException("A duração do estágio deve ser um valor não negativo.");
+            }
+
+            this.duracaoEstagio = novaDuracao;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro ao atualizar a duração do estágio: " + e.getMessage());
+        }
+    }
 }
 
