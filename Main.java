@@ -2,6 +2,9 @@ package ProjetoLPP2023.ProjetoLPP;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Main {
 
@@ -23,6 +26,17 @@ public class Main {
         for (Funcionario funcionario : funcionarios) {
             funcionario.imprimirDados();
         }
+        // Abre o arquivo para escrita
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter("funcionarios.txt"))) {
+            for (Funcionario funcionario : funcionarios) {
+                // Escreve as informações do funcionário no arquivo
+                writer.println(funcionario.toString());
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao escrever no arquivo: " + e.getMessage());
+        }
+
         // Tratamento de erros
         try {
             gerente1.aumentarSalario(-10); // Tentativa de aumento com valor negativo

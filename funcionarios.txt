@@ -1,0 +1,5 @@
+Funcionário [nome=João, idade=35, salário=5000.0]
+Funcionário [nome=Maria, idade=40, salário=5500.0]
+Funcionário [nome=Pedro, idade=25, salário=3000.0]
+Funcionário [nome=Lucas, idade=20, salário=1000.0]
+Funcionário [nome=Luana, idade=21, salário=1500.0]
