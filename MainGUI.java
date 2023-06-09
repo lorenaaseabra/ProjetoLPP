@@ -35,10 +35,13 @@ public class MainGUI extends JFrame {
         Gerente gerente2 = new Gerente("Maria", 40, 5500.0, "RH");
         Desenvolvedor dev1 = new Desenvolvedor("Pedro", 25, 3000.0, "Java");
         Estagiario estagiario1 = new Estagiario("Lucas", 20, 1000.0, "Python", 6);
+        Estagiario estagiario2 = new Estagiario("Luana", 21, 1500.0, "JavaScript", 12);
+
         funcionarios.add(gerente1);
         funcionarios.add(gerente2);
         funcionarios.add(dev1);
         funcionarios.add(estagiario1);
+        funcionarios.add(estagiario2);
 
         for (Funcionario funcionario : funcionarios) {
             JPanel panel = new JPanel();
@@ -94,17 +97,21 @@ public class MainGUI extends JFrame {
                 .append("Idade: ").append(funcionario.getIdade()).append("\n")
                 .append("Salário: ").append(funcionario.getSalario()).append("\n");
 
-        if (funcionario instanceof Gerente) {
-            Gerente gerente = (Gerente) funcionario;
-            stringBuilder.append("Departamento: ").append(gerente.getDepartamento()).append("\n");
-        } else if (funcionario instanceof Desenvolvedor) {
-            Desenvolvedor desenvolvedor = (Desenvolvedor) funcionario;
-            stringBuilder.append("Linguagem: ").append(desenvolvedor.getLinguagem()).append("\n");
-        } else if (funcionario instanceof Estagiario) {
-            Estagiario estagiario = (Estagiario) funcionario;
-            stringBuilder.append("Duração do Estágio: ").append(estagiario.getDuracaoEstagio()).append(" meses\n");
+        try {
+            if (funcionario instanceof Gerente) {
+                Gerente gerente = (Gerente) funcionario;
+                stringBuilder.append("Departamento: ").append(gerente.getDepartamento()).append("\n");
+            } else if (funcionario instanceof Desenvolvedor) {
+                Desenvolvedor desenvolvedor = (Desenvolvedor) funcionario;
+                stringBuilder.append("Linguagem: ").append(desenvolvedor.getLinguagem()).append("\n");
+            } else if (funcionario instanceof Estagiario) {
+                Estagiario estagiario = (Estagiario) funcionario;
+                stringBuilder.append("Duração do Estágio: ").append(estagiario.getDuracaoEstagio()).append(" meses\n");
+            }
+        } catch (Exception e) {
+            stringBuilder.append("Erro ao formatar dados do funcionário: ").append(e.getMessage()).append("\n");
         }
-
+    
         return stringBuilder.toString();
     }
 
@@ -121,10 +128,16 @@ public class MainGUI extends JFrame {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception e) {
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Erro ao configurar o look and feel do sistema.");
             }
 
-            MainGUI gui = new MainGUI();
-            gui.setVisible(true);
+            try {
+                MainGUI gui = new MainGUI();
+                gui.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Erro ao criar a interface gráfica.");
+            }
         });
     }
 }
