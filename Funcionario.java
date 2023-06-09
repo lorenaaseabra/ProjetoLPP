@@ -76,5 +76,20 @@ public abstract class Funcionario {
                 return new Funcionario(this);
             }
         }
+
+        // Método com tratamento de erro
+
+        public void aumentarSalario(double aumentoPercentual) {
+            try {
+                if (aumentoPercentual < 0) {
+                    throw new IllegalArgumentException("O aumento percentual deve ser um valor positivo.");
+                }
+
+                double aumento = salario * aumentoPercentual / 100;
+                salario += aumento;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
     
 }
